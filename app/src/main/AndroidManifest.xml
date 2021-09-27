@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.psa.sdk">
+
+    <application
+        android:name="com.psa.sdk.SampleApp"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.WearableSDK"
+        android:fullBackupContent="true"
+        android:allowBackup="true">
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity android:name=".ui.OtherActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
