@@ -4,9 +4,9 @@ import android.content.Context
 import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.wearable.*
+import com.psa.sdk.models.Result
 import com.psa.sdk.util.Config
 import com.psa.sdk.util.EventUri
-import com.psa.sdk.models.Result
 
 
 class Sender(private val context: Context, private val config: Config):SenderInterface  {
@@ -105,16 +105,16 @@ class Sender(private val context: Context, private val config: Config):SenderInt
         }
     }
 
-   /* inline fun <reified T> addListener(task: Task<DataItem>, crossinline listener:(Result<T>)->Unit) {
-        task.addOnSuccessListener {
-            listener.invoke(Result.Success(it.data as T))
-        }
-        task.addOnFailureListener {
-            listener.invoke(Result.Failure(it.message,it))
-        }
-        task.addOnCanceledListener {
-                listener.invoke(Result.Cancelled())
-        }
-    }*/
+    /* inline fun <reified T> addListener(task: Task<DataItem>, crossinline listener:(Result<T>)->Unit) {
+         task.addOnSuccessListener {
+             listener.invoke(Result.Success(it.data as T))
+         }
+         task.addOnFailureListener {
+             listener.invoke(Result.Failure(it.message,it))
+         }
+         task.addOnCanceledListener {
+                 listener.invoke(Result.Cancelled())
+         }
+     }*/
 }
 

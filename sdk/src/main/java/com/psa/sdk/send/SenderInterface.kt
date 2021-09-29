@@ -3,6 +3,7 @@ package com.psa.sdk.send
 import com.google.android.gms.wearable.*
 import com.psa.sdk.util.EventUri
 import com.psa.sdk.models.Result
+import java.util.function.Consumer
 
 interface SenderInterface {
 

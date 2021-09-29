@@ -7,16 +7,14 @@ plugins {
 
 android {
     compileSdkVersion(BuildAndroidConfig.COMPILE_SDK_VERSION )
-    dexOptions {
-        javaMaxHeapSize = "4G"
-    }
 
-        buildTypes {
-            getByName("release") {
-                isMinifyEnabled = false
-                proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
+    }
 
 
     defaultConfig {
@@ -60,22 +58,17 @@ dependencies {
     implementation(Dependencies.APPCOMPAT)
     implementation(Dependencies.MATERIAL)
     implementation(Dependencies.CONSTRAINT_LAYOUT)
-    implementation(Dependencies.LOGGING)
-    implementation(Dependencies.PLAY_CORE)
-    implementation(Dependencies.KOIN)
-    implementation(Dependencies.KOIN_FRAGMENT)
-    implementation(Dependencies.KOIN_SCOPE)
-    implementation(Dependencies.KOIN_VIEWMODEL)
-    implementation(Dependencies.KOIN_EXT)
+    implementation(project(":sdk"))
+    implementation(Dependencies.COROUTINES_ANDROID)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
 
-    implementation(Dependencies.LIFECYCLE_SERVICE)
-    implementation(Dependencies.LIFECYCLE_COMMON)
-    implementation(Dependencies.LIFECYCLE_PROCESS)
-    implementation(Dependencies.LIFECYCLE_LIVEDATA)
-    implementation(Dependencies.LIFECYCLE_SAVED_STATE)
-    implementation(Dependencies.LIFECYCLE_VIEWMODEL)
+    implementation(Dependencies.CORE_KTX)
     implementation (Dependencies.WEARABLE_GOOGLE_SERVICES)
     implementation (Dependencies.GSON)
-    implementation(project(":sdk"))
+    implementation ("androidx.core:core-ktx:1.6.0")
+    implementation ("androidx.percentlayout:percentlayout:1.0.0")
+    implementation ("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+    implementation ("androidx.wear:wear:1.1.0")
 
 }

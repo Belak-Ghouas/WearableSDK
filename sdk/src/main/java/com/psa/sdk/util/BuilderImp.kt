@@ -6,12 +6,12 @@ import com.google.gson.Gson
  *
  * @author Abdelhak GHOUAS
  */
-class BuilderImp<in T, out U> :Builder<T,U> {
+class BuilderImp<U> :Builder<U>{
     val  gson = Gson()
-     override fun < T, U> build(byte: T, jClass:Class<U>): U {
+     override fun build(byte: ByteArray, jClass:Class<U>): U {
          return if (byte is ByteArray){
              Gson().fromJson(
-                 String(byte as ByteArray),
+                 String(byte),
                  jClass
              )
          }else  Gson().fromJson(
@@ -20,4 +20,31 @@ class BuilderImp<in T, out U> :Builder<T,U> {
          )
     }
 
+ /*   class BuilderM<T>(private val instantiator: Supplier<T>) {
+        private val instanceModifiers: MutableList<Consumer<T>> = ArrayList()
+
+        fun <U> with(consumer: BiConsumer<T, U>, value: U): BuilderM<T> {
+            val c: Consumer<T> = Consumer<T> { instance -> consumer.accept(instance, value) }
+            instanceModifiers.add(c)
+            return this
+        }
+
+        fun build(): T {
+            val value: T = instantiator.get()
+            instanceModifiers.forEach { modifier: Consumer<T> ->
+                modifier.accept(
+                    value
+                )
+            }
+            instanceModifiers.clear()
+            return value
+        }
+
+        companion object {
+            fun <T> of(instantiators: Supplier<T>): BuilderM<T> {
+                return BuilderM(instantiators)
+            }
+        }
+
+    }*/
 }

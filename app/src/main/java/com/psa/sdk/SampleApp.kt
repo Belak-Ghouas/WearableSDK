@@ -22,7 +22,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level.ERROR
-import timber.log.Timber
 
 /**
  * Base class for maintaining global application state.

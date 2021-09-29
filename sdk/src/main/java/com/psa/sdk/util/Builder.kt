@@ -5,7 +5,7 @@ package com.psa.sdk.util
  * @author Abdelhak GHOUAS
  */
 
-interface Builder<in T , out U> {
-    fun <T,U> build(byte: T,jClass: Class<U>): U
+interface Builder<U> {
+    fun build(byte:ByteArray,jClass: Class<U>): U
 }
 

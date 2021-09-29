@@ -2,17 +2,19 @@ package com.psa.sdk.send
 
 import android.content.Context
 import com.google.android.gms.wearable.Asset
-import com.psa.sdk.models.*
-import com.psa.sdk.util.Builder
-import com.psa.sdk.util.BuilderImp
+import com.psa.sdk.models.BitmapModel
+import com.psa.sdk.models.ExchangedModel
+import com.psa.sdk.models.Result
+import com.psa.sdk.models.toAsset
 import com.psa.sdk.util.Config
 
 /**
  *
- * @author Abdelhak GHOUAS
+ * @author Abdelhak GHOUAS  on 28/09/2021
  */
-class SenderWrapper<T>(private val klass: Class<T>, context: Context, config: Config, private val  builder: Builder<ByteArray,T>){
-    private val mSender= Sender(context,config)
+class SenderWrapper(context: Context, config: Config){
+    @PublishedApi()
+   internal val mSender= Sender(context,config)
 
     fun sendAsset(bitmapModel: BitmapModel, onCompletedListener: ((Result<Asset>)->Unit )?=null) {
         mSender.sendAsset(
@@ -23,24 +25,15 @@ class SenderWrapper<T>(private val klass: Class<T>, context: Context, config: Co
         )
     }
 
-
-    fun sendData(dataModel:DataExchanged,onCompletedListener: ((Result<T>)->Unit )?=null) {
-        mSender.sendData(dataModel.toByteArray(),dataModel.event) {result->
-            onCompletedListener?.invoke(result.transform { builder.build(it,klass) })
-
-//            when(result){
-//                is  Result.Success -> onCompletedListener?.invoke(
-//                    Result.Success(builder.build(result.value,klass)))
-//                is Result.Failure-> onCompletedListener?.invoke(Result.Failure(result.message,result.throwable))
-//                is Result.Cancelled->onCompletedListener?.invoke(Result.Cancelled())
-//                is Result.Unknown -> onCompletedListener?.invoke(Result.Unknown())
-//            }
+    fun <U>sendMessage(dataModel:ExchangedModel<U>,onCompletedListener: ((Result<U>)->Unit )?=null){
+        mSender.sendMessage(dataModel.toByte()){ result ->
+                onCompletedListener?.invoke(result.transform{dataModel.fromByte(it)})
         }
     }
 
-    fun sendMessage(dataModel:DataExchanged,onCompletedListener: ((Result<T>)->Unit )?=null){
-        mSender.sendMessage(dataModel.toByteArray()){ result ->
-           onCompletedListener?.invoke(result.transform { builder.build(it,klass) })
+   fun < U> sendData(dataModel:ExchangedModel<U>,onCompletedListener: ((Result<U>)->Unit )?=null) {
+        mSender.sendData(dataModel.toByte(),dataModel) { result->
+                onCompletedListener?.invoke(result.transform {dataModel.fromByte(it)})
         }
     }
 

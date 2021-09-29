@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.psa.sdk">
-   <application>
-       <service android:name=".service.AbstractWearableService" android:enabled="true" android:exported="true"
-          >
-           <intent-filter>
-               <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
-               <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
-               <data android:scheme="wear" android:host="*" android:path="/ServiceNotificationChannel" />
-               <data android:scheme="wear" android:host="*" android:path="/messagesChannel" />
-           </intent-filter>
-       </service>
-   </application>
 </manifest>
