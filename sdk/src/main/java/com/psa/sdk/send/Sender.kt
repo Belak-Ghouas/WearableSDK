@@ -48,8 +48,7 @@ class Sender(private val context: Context, private val config: Config):SenderInt
 
 
     /**
-     * sending data with DataClient (recommended to send heavy data with this way)
-     *
+     * sending data with DataClient (recommended to send heavy data )
      */
     override fun  sendData(data: ByteArray, event:EventUri, onCompletedListener: ((Result<ByteArray>)->Unit )?){
         val dataClient = Wearable.getDataClient(context)
@@ -105,7 +104,7 @@ class Sender(private val context: Context, private val config: Config):SenderInt
         }
     }
 
-    /* inline fun <reified T> addListener(task: Task<DataItem>, crossinline listener:(Result<T>)->Unit) {
+ /*    inline fun <reified T> addListener(task: Task<DataItem>, crossinline listener:(Result<T>)->Unit) {
          task.addOnSuccessListener {
              listener.invoke(Result.Success(it.data as T))
          }

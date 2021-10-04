@@ -5,46 +5,38 @@ import android.net.Uri
 import com.google.android.gms.wearable.DataEvent
 import com.google.android.gms.wearable.DataItem
 import com.google.android.gms.wearable.MessageEvent
-import com.google.gson.Gson
-import com.psa.sdk.models.DataExchanged
+import com.psa.sdk.util.Builder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import kotlin.reflect.KClass
 
-class DataListenerImpl<T>(private val jClass: Class<T>) : DataListener {
 
-    companion object {
-
-      /*  var dataFlow: MutableStateFlow<DataExchanged?> = MutableStateFlow(null)
-        var messageFlow: MutableStateFlow<DataExchanged?> = MutableStateFlow(null)
-        var assetFlow: Flow<Bitmap?> = MutableStateFlow(null)*/
-       // var t:FlowHandler<DataExchanged>?  = Singleton.Instance("com.psa.sdk.service.FlowHandler")
-        //var flowProvider:DataFlow<DataExchanged>? =Singleton.Instance("com.psa.sdk.service.FlowHandler")
-    }
-
+/**
+ * Sample of custom Listener for messages and data on the device
+ * The listener will be triggered by the [AbstractWearableService] on each event
+ * To expose this Data i put it inside A Singleton [Container] object which have an instance
+ * of [DataFlow] which we can observe the DATA
+ *
+ * @author Abdelhak GHOUAS on 30/09/2021
+ */
+class DataListenerImpl<T>(private val jClass: Class<T>,val builder: Builder<T>) : DataListener {
+    private var flowProvider: DataFlow<T>? = Container.instanceTypeSafe(FlowHandler<T>()::class.java)
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
         CoroutineScope(Dispatchers.IO).launch {
-           val  flowProvider:DataFlow<T>?= Singleton.Instance("com.psa.sdk.service.FlowHandler")
-            flowProvider?.messageFlow?.emit(Gson().fromJson(String(messageEvent.data), jClass))
+            flowProvider?.messageFlow?.emit( builder.build(messageEvent.data,jClass))
         }
     }
 
     override fun onDataChanged(dataItem: DataItem) {
         CoroutineScope(Dispatchers.IO).launch {
-            val  flowProvider:DataFlow<T>?= Singleton.Instance("com.psa.sdk.service.FlowHandler")
-            flowProvider?.dataFlow?.emit(Gson().fromJson(String(dataItem.data), jClass))
+
+            flowProvider?.dataFlow?.emit( builder.build(dataItem.data,jClass))
         }
     }
 
     override fun onAssetChanged(bitmap: Bitmap, uri: Uri) {
         CoroutineScope(Dispatchers.IO).launch {
-            val  flowProvider:DataFlow<T>?= Singleton.Instance("com.psa.sdk.service.FlowHandler")
             flowProvider?.assetFlow?.emit(bitmap)
         }
     }

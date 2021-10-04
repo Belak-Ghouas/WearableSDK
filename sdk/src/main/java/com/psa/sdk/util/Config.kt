@@ -2,7 +2,7 @@ package com.psa.sdk.util
 
 /**
  * Config to get configuration for sending message from and to phone/watch
- * for messages we need capabilities
+ * for messages we need capabilities and Route
  * @author Abdelhak GHOUAS
  */
 interface Config {
@@ -14,7 +14,7 @@ interface Config {
     fun getCapability():String
 
     /**
-     * the route of the message that we want to send
+     * the route that we want to send messages on it
      * we will receive the message in the other device in this same route
      */
     fun getMessageRoute():String
