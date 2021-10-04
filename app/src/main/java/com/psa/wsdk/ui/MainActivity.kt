@@ -1,4 +1,4 @@
-package com.psa.watch
+package com.psa.wsdk.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import com.psa.wsdk.R
 import com.psa.wsdk.models.DataExchanged
 import com.psa.wsdk.send.SenderWrapper
 import com.psa.wsdk.service.DataFlow
@@ -19,19 +20,19 @@ import java.time.Instant
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
-
-class MainActivity : AppCompatActivity() {
-
-    lateinit var button: Button
-    lateinit var text: TextView
-    var data = MutableLiveData<String>()
+class MainActivity:AppCompatActivity() {
+    private lateinit var button: Button
+    private lateinit var text : TextView
+    private var data= MutableLiveData<String>()
     private val flowProvider:DataFlow<DataExchanged>? = Container.instanceTypeSafe(FlowHandler<DataExchanged>().javaClass)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val sender = SenderWrapper(this, object : Config {
+
+        val sender= SenderWrapper(this,object: Config {
             override fun getCapability(): String {
-                return "messages"
+                return  "messages"
             }
 
             override fun getMessageRoute(): String {
@@ -39,24 +40,23 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        button = findViewById(R.id.send_message)
-        text = findViewById(R.id.text)
+        button=findViewById(R.id.send_message)
+        text=findViewById(R.id.text)
         button.setOnClickListener {
             val time = DateTimeFormatter
                 .ofPattern("yyyy-MM-dd HH:mm:ss")
                 .withZone(ZoneOffset.UTC)
                 .format(Instant.now())
-            sender.sendMessage(DataExchanged(Event.CommandCharging, "hello from watch at $time")) {
+            sender.sendMessage(DataExchanged(Event.CommandCharging, "hello from Phone at $time")) {
                 Log.e("Completed", it.toString())
             }
         }
-        data.observe(this, {
-            text.text = it
+        data.observe(this,{
+            text.text=it
         })
 
         flowProvider?.messageFlow?.observe(lifecycleScope) {
             data.postValue(it?.content.toString())
         }
-
     }
 }

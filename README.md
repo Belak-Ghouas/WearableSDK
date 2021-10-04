@@ -24,7 +24,7 @@ implementation(project(":sdk"))
    </string-array>
    </resources>
 ```
-3. Third one you have this configuration file , now you have to implements the [a relative link](/sdk/src/main/java/com/psa/sdk/service/AbstractWearableService.kt)
+3. Third one you have this configuration file , now you have to implements the [a relative link](/sdk/src/main/java/com/psa/wsdk/service/AbstractWearableService.kt)
    there is one abstract Method and it's a Listener to get the Data from the service.
    it's more efficient with an example.
    
@@ -43,7 +43,7 @@ implementation(project(":sdk"))
 }
 ```
    So we override the method,in it's constructor we need the `Class` model we Exchange on the phone/watch communication , and a builder also to build the `ByteArray` received to a model.
-   This sample Listener implements the [a relative link](/sdk/src/main/java/com/psa/sdk/service/DataListener.kt), for more readability,clarity and comprehension,
+   This sample Listener implements the [a relative link](/sdk/src/main/java/com/psa/wsdk/service/DataListener.kt), for more readability,clarity and comprehension,
    i created a custom implementation for this Interface , and there is how it look.
 ```kotlin
 /**
@@ -65,12 +65,13 @@ class DataListenerImpl<T>(private val jClass: Class<T>,val builder: Builder<T>) 
    Once we create the Service we must add it to the `Manifest.xml` file.
    ##### **Pay attention**
    your file must contains this lines
+
 ```xml
     <!-- for the watch-->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.psa.sdk">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.psa.wsdk">
    <uses-permission android:name="android.permission.WAKE_LOCK" />
    
-   <service android:name="com.psa.sdk.util.WearableService" android:enabled="true" android:exported="true">
+   <service android:name="com.psa.wsdk.util.WearableService" android:enabled="true" android:exported="true">
    <intent-filter>
       <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
       <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
