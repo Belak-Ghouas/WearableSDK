@@ -1,4 +1,4 @@
-package com.psa.watch
+package com.psa.app.util
 
 import com.google.gson.Gson
 import com.psa.sdk.models.DataExchanged
