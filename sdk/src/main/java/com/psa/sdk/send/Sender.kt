@@ -52,8 +52,8 @@ class Sender(private val context: Context, private val config: Config): SenderIn
      */
     override fun  sendData(data: ByteArray, event: EventUri, onCompletedListener: ((Result<ByteArray>)->Unit )?){
         val dataClient = Wearable.getDataClient(context)
-
-        val putDataReq = PutDataRequest.create(event.getPath())
+        val path = config.getDataPrefixPath()+event.getPath()
+        val putDataReq = PutDataRequest.create(path)
         putDataReq.data= data
         putDataReq.setUrgent()
         val putDataTask: Task<DataItem> = dataClient.putDataItem(putDataReq)

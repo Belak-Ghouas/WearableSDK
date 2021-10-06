@@ -18,4 +18,11 @@ interface Config {
      * we will receive the message in the other device in this same route
      */
     fun getMessageRoute():String
+
+
+    /**
+     * the prefix path for sending data
+     * to not receive callbacks when you sendData
+     */
+    fun getDataPrefixPath():String
 }

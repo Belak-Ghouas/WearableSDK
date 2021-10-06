@@ -42,6 +42,10 @@ class MainActivity:AppCompatActivity() {
             override fun getMessageRoute(): String {
                 return "/messages"
             }
+
+            override fun getDataPrefixPath(): String {
+                return "/from_phone"
+            }
         })
 
         buttonM=findViewById(R.id.send_message)

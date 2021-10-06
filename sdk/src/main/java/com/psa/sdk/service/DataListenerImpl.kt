@@ -23,14 +23,18 @@ class DataListenerImpl<T>(private val jClass: Class<T>,val builder: Builder<T>) 
     private var flowProvider: DataFlow<T>? = Container.instanceTypeSafe(FlowHandler<T>()::class.java)
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
+        // to avoid buffer closed if we go inside and the coroutine is suspended
+        val byte=messageEvent.data
         CoroutineScope(Dispatchers.IO).launch {
-            flowProvider?.messageFlow?.emit( builder.build(messageEvent.data,jClass))
+            flowProvider?.messageFlow?.emit( builder.build(byte,jClass))
         }
     }
 
     override fun onDataChanged(dataItem: DataItem) {
+        // to avoid buffer closed if we go inside and the coroutine is suspended
+        val byte=dataItem.data
         CoroutineScope(Dispatchers.IO).launch {
-            flowProvider?.dataFlow?.emit( builder.build(dataItem.data,jClass))
+            flowProvider?.dataFlow?.emit( builder.build(byte,jClass))
         }
     }
 
