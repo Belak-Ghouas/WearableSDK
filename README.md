@@ -14,7 +14,7 @@ To make this sdk work on your project :
 implementation(project(":sdk"))
 ```
 2. After that make sure you have the file `wear.xml`  in your app `res\values\wear.xml` and inside this file you must
-   have the capabilities of the device like [a relative link](/sdk/src/main/res/values/wear.xml) and put inside the capabilities of
+   have the capabilities of the device like [wear.xml](/sdk/src/main/res/values/wear.xml) and put inside the capabilities of
    the wearable (this file must be in the phone and watch) and have the same values.
 ```xml
    <resources xmlns:tools="http://schemas.android.com/tools"
