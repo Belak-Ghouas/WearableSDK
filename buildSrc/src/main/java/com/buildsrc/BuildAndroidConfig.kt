@@ -27,7 +27,7 @@ object BuildAndroidConfig {
     const val TARGET_SDK_VERSION = 30
 
     const val VERSION_CODE = 1
-    const val VERSION_NAME = "0.0.0-20092021"
+    const val VERSION_NAME = "0.0.1-20092021"
 
     const val SUPPORT_LIBRARY_VECTOR_DRAWABLES = true
 

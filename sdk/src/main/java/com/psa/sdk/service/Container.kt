@@ -1,5 +1,7 @@
 package com.psa.sdk.service
 
+import android.annotation.SuppressLint
+
 /**
  *
  * @author Abdelhak GHOUAS  on 30/09/2021
@@ -9,7 +11,8 @@ package com.psa.sdk.service
 object Container {
     private val instances: MutableMap<String, Any> = HashMap()
 
-    private fun <T> InstanceTypeUnsafe(name: String ,vararg initargs: Any): T? {
+    @SuppressLint
+    private fun <T> instanceTypeUnsafe(name: String, vararg initargs: Any): T? {
         val c: Class<T> = try {
             Class.forName(name) as Class<T>
         } catch (e1: ClassNotFoundException) {
