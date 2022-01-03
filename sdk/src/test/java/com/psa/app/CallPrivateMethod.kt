@@ -17,8 +17,7 @@ inline fun <reified T> callPrivateMethod(objectInstance: Any, methodName: String
     privateMethod?.let {
         it.isAccessible = true
         if (it.isAccessible) {
-            val result = it.invoke(objectInstance, *args)
-            when(result){
+            when(val result = it.invoke(objectInstance, *args)){
                 is T -> { return result}
                 else -> throw NoSuchMethodException("Method $methodName does not exist in ${objectInstance::class.qualifiedName} with this return type")
             }

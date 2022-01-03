@@ -26,6 +26,7 @@ object Dependencies {
     const val GSON="com.google.code.gson:gson:${BuildDependenciesVersions.GSON}"
     const val WEARABLE_GOOGLE_SERVICES="com.google.android.gms:play-services-wearable:${BuildDependenciesVersions.WEARABLE_GOOGLE_SERVICES}"
     const val KOTLIN = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${BuildDependenciesVersions.KOTLIN}"
+    const val KOTLIN_REFLECT="org.jetbrains.kotlin:kotlin-reflect:${BuildDependenciesVersions.KOTLIN}"
     const val APPCOMPAT = "androidx.appcompat:appcompat:${BuildDependenciesVersions.APPCOMPAT}"
     const val MATERIAL = "com.google.android.material:material:${BuildDependenciesVersions.MATERIAL}"
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${BuildDependenciesVersions.COROUTINES}"
