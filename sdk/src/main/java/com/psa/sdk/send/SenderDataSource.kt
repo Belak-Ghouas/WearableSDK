@@ -17,7 +17,7 @@ interface SenderDataSource {
      * @param data : the byteArray we want to send
      * @param onCompletedListener: the callback of the termination with the [Result] which can be successful,canceled..
      */
-    suspend fun sendMessage(data: ByteArray,onCompletedListener: ((Result<ByteArray>) -> Unit)?=null)
+    suspend fun sendMessage(data: ByteArray):Result<ByteArray>
 
     /**
      * send data with the Wearable DataClient from/to the watch/phone

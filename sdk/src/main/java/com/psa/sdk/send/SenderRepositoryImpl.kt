@@ -14,9 +14,8 @@ class SenderRepositoryImpl(private val senderDataSource: SenderDataSource):Sende
 
     override suspend fun sendMessage(
         data: ByteArray,
-        onCompletedListener: ((Result<ByteArray>) -> Unit)?
-    ) {
-        senderDataSource.sendMessage(data,onCompletedListener)
+    ): Result<ByteArray> {
+        return senderDataSource.sendMessage(data)
     }
 
     override suspend fun sendData(

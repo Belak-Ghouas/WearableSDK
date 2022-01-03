@@ -1,7 +1,9 @@
 package com.psa.app.di
 
+import com.psa.app.ui.MainActivityViewModel
 import com.psa.sdk.send.*
 import com.psa.sdk.util.Config
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**
@@ -22,6 +24,9 @@ object ConfigImpl :Config{
     override fun getDataPrefixPath(): String {
         return "/from_phone"
     }
+}
+val viewModels = module {
+    viewModel{MainActivityViewModel(sendMessageUseCase = get())}
 }
 val NetworkDependency = module {
     single <Config>{ConfigImpl }

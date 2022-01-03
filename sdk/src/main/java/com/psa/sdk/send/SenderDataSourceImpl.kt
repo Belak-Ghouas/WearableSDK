@@ -8,7 +8,10 @@ import com.psa.sdk.models.Result
 import com.psa.sdk.util.Config
 import com.psa.sdk.util.EventUri
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import java.lang.IllegalStateException
+import kotlin.coroutines.resume
 
 /**
  * @author Abdelhak GHOUAS
@@ -23,13 +26,12 @@ class SenderDataSourceImpl(private val context: Context, private val config: Con
     private val capabilityClient = Wearable.getCapabilityClient(context)
 
 
-    override suspend fun sendMessage(data: ByteArray, onCompletedListener: ((Result<ByteArray>) -> Unit)?) {
-        withContext(Dispatchers.IO) {
-            Log.d(tag,"inside coroutine")
+    override suspend fun sendMessage(data: ByteArray): Result<ByteArray> = suspendCancellableCoroutine{coroutine->
+
             capabilityClient.getCapability(capability, CapabilityClient.FILTER_REACHABLE)
                 .addOnSuccessListener {
                     if (it.nodes.isEmpty()) {
-                        Log.d(tag, "sendMessage Empty Node")
+                        coroutine.resume(Result.Failure("Empty Nodes",IllegalStateException()))
 
                     } else it.nodes.forEach { node ->
                         Wearable.getMessageClient(context).sendMessage(
@@ -37,17 +39,14 @@ class SenderDataSourceImpl(private val context: Context, private val config: Con
                             route, data
                         ).addOnSuccessListener {
                             Log.d(tag, "sendMessage success ")
-                            checkNotNull(onCompletedListener).apply {
-                                invoke(Result.Success(data))
-                            }
+                          coroutine.resume(Result.Success(data))
+
                         }.addOnFailureListener { exception ->
                             Log.d(tag, "sendMessage failure")
-                            checkNotNull(onCompletedListener).apply {
-                                invoke(Result.Failure(exception.message, exception))
-                            }
+                            coroutine.resume(Result.Failure(exception.message, exception))
                         }
                     }
-                }
+
         }
 
     }

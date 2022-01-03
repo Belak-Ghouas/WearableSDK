@@ -19,6 +19,7 @@ package com.psa.app
 import android.app.Application
 import com.google.android.play.core.splitcompat.SplitCompatApplication
 import com.psa.app.di.NetworkDependency
+import com.psa.app.di.viewModels
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.loadKoinModules
@@ -43,7 +44,7 @@ class SampleApp : Application() {
             // Android context
             androidContext(this@SampleApp)
         }
-        loadKoinModules(NetworkDependency)
+        loadKoinModules(listOf(NetworkDependency, viewModels))
     }
 
 }
