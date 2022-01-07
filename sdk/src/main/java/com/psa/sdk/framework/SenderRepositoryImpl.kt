@@ -1,4 +1,4 @@
-package com.psa.sdk.send
+package com.psa.sdk.framework
 
 import com.google.android.gms.wearable.Asset
 import com.psa.sdk.models.Result
@@ -20,19 +20,17 @@ class SenderRepositoryImpl(private val senderDataSource: SenderDataSource):Sende
 
     override suspend fun sendData(
         data: ByteArray,
-        event: EventUri,
-        onCompletedListener: ((Result<ByteArray>) -> Unit)?
-    ) {
-      senderDataSource.sendData(data,event,onCompletedListener)
+        event: EventUri
+    ):Result<ByteArray> {
+     return  senderDataSource.sendData(data,event)
     }
 
     override suspend fun sendAsset(
         data: Asset,
         assetName: String,
-        path: String,
-        onCompletedListener: ((Result<Asset>) -> Unit)?
-    ) {
-      senderDataSource.sendAsset(data,assetName,path,onCompletedListener)
+        path: String
+    ) :Result<Asset>{
+     return senderDataSource.sendAsset(data,assetName,path)
     }
 
 }

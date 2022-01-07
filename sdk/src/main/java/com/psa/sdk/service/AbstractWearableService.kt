@@ -15,7 +15,8 @@ import java.io.InputStream
 abstract class AbstractWearableService : WearableListenerService() {
     private val listener: DataListener by lazy { getListenerValue()}
     private val tag="WearableService"
-   lateinit var  context:Context
+    lateinit var  context:Context
+
     override fun onCreate() {
         super.onCreate()
         Log.e(tag, "OnCreate")

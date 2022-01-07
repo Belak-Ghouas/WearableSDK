@@ -30,17 +30,14 @@ object Dependencies {
     const val APPCOMPAT = "androidx.appcompat:appcompat:${BuildDependenciesVersions.APPCOMPAT}"
     const val MATERIAL = "com.google.android.material:material:${BuildDependenciesVersions.MATERIAL}"
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${BuildDependenciesVersions.COROUTINES}"
-    const val COROUTINES_ANDROID =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${BuildDependenciesVersions.COROUTINES}"
+    const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${BuildDependenciesVersions.COROUTINES}"
     const val ROOM = "androidx.room:room-runtime:${BuildDependenciesVersions.ROOM}"
     const val ROOM_KTX = "androidx.room:room-ktx:${BuildDependenciesVersions.ROOM}"
     const val ROOM_COMPILER = "androidx.room:room-compiler:${BuildDependenciesVersions.ROOM}"
 
     const val RECYCLE_VIEW = "androidx.recyclerview:recyclerview:${BuildDependenciesVersions.RECYCLE_VIEW}"
-    const val RECYCLE_VIEW_SELECTION =
-        "androidx.recyclerview:recyclerview-selection:${BuildDependenciesVersions.RECYCLE_VIEW_SELECTION}"
-    const val NAVIGATION_FRAGMENT =
-        "androidx.navigation:navigation-fragment-ktx:${BuildDependenciesVersions.NAVIGATION}"
+    const val RECYCLE_VIEW_SELECTION = "androidx.recyclerview:recyclerview-selection:${BuildDependenciesVersions.RECYCLE_VIEW_SELECTION}"
+    const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${BuildDependenciesVersions.NAVIGATION}"
     const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:${BuildDependenciesVersions.NAVIGATION}"
 
     const val LIFECYCLE_SERVICE = "androidx.lifecycle:lifecycle-service:${BuildDependenciesVersions.LIFECYCLE}"
@@ -74,24 +71,7 @@ object Dependencies {
     const val PLAY_CORE = "com.google.android.play:core:${BuildDependenciesVersions.PLAY_CORE}"
     const val ANDROID_DESUGAR = "com.android.tools:desugar_jdk_libs:${BuildDependenciesVersions.ANDROID_DESUGAR}"
 
-    const val PIMS = "com.inetpsa.mmx:pims-UI:${BuildDependenciesVersions.PIMS}"
-
-    const val MP_ANDROID_CHART = "com.github.PhilJay:MPAndroidChart:${BuildDependenciesVersions.MP_ANDROID_CHART}"
-
-    const val ANDROID_MAPS = "com.google.android.gms:play-services-maps:${BuildDependenciesVersions.ANDROID_MAPS}"
-    const val ANDROID_MAPS_KTX = "com.google.maps.android:maps-ktx:${BuildDependenciesVersions.ANDROID_MAPS_KTX}"
-    const val ANDROID_MAPS_UTILS_KTX =
-        "com.google.maps.android:maps-utils-ktx:${BuildDependenciesVersions.ANDROID_MAPS_UTILS_KTX}"
-
-    const val INSTANT_APP = "com.google.android.gms:play-services-instantapps:${BuildDependenciesVersions.INSTANT_APP}"
-
-    const val WORKER = "androidx.work:work-runtime-ktx:${BuildDependenciesVersions.WORKER}"
-
-    const val FIREBASE_PLATFORM = "com.google.firebase:firebase-bom:${BuildDependenciesVersions.FIREBASE}"
-    const val FIREBASE_CRASHLYTICS = "com.google.firebase:firebase-crashlytics-ktx"
-    const val FIREBASE_ANALYTICS = "com.google.firebase:firebase-analytics-ktx"
-    const val FIREBASE_PERFS = "com.google.firebase:firebase-perf-ktx"
-
+  
     const val GOOGLE_PLAY_SERVICES_LOCATION =
         "com.google.android.gms:play-services-location:${BuildDependenciesVersions.ANDROID_LOCATION}"
 

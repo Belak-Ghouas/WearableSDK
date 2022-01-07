@@ -1,10 +1,7 @@
-package com.psa.app.di
+package com.psa.watch.di
 
-import com.psa.app.ui.MainActivityViewModel
-import com.psa.app.ui.SendMessageUseCase
 import com.psa.sdk.framework.*
 import com.psa.sdk.util.Config
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**
@@ -23,16 +20,14 @@ object ConfigImpl :Config{
     }
 
     override fun getDataPrefixPath(): String {
-        return "/from_phone"
+        return "/from_watch"
     }
 }
-val viewModels = module {
-    viewModel{MainActivityViewModel(sendMessageUseCase = get())}
-}
-val NetworkDependency = module {
-    single <Config>{ConfigImpl }
-    single <ISender>{ Sender(context = get(), config = get())  }
+
+val senderDependency = module {
+    single <Config>{ ConfigImpl }
+    single <ISender> { Sender(context = get(), config = get())  }
     single <SenderDataSource> {SenderDataSourceImpl(sender = get())    }
     single <SenderRepository>{SenderRepositoryImpl(senderDataSource = get())  }
-    single { SendMessageUseCase(senderRepository = get()) }
+
 }

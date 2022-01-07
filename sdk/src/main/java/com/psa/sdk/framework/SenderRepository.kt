@@ -1,4 +1,4 @@
-package com.psa.sdk.send
+package com.psa.sdk.framework
 
 import com.google.android.gms.wearable.Asset
 import com.psa.sdk.models.Result
@@ -10,7 +10,10 @@ import com.psa.sdk.util.EventUri
  * Created 29/12/2021
  */
 interface SenderRepository {
+
     suspend fun sendMessage(data: ByteArray):Result<ByteArray>
-    suspend fun sendData(data: ByteArray, event: EventUri, onCompletedListener: ((Result<ByteArray>)->Unit )? =null)
-    suspend fun sendAsset(data: Asset, assetName:String, path: String, onCompletedListener: ((Result<Asset>) ->Unit )? =null)
+
+    suspend fun sendData(data: ByteArray, event: EventUri):Result<ByteArray>
+
+    suspend fun sendAsset(data: Asset, assetName:String, path: String): Result<Asset>
 }

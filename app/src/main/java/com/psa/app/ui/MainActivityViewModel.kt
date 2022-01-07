@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.psa.sdk.models.ExchangedModel
 import com.psa.sdk.models.Result
-import com.psa.sdk.send.SendMessageUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -15,9 +14,16 @@ import kotlinx.coroutines.launch
  */
 class MainActivityViewModel(private val sendMessageUseCase: SendMessageUseCase) : ViewModel() {
 
-    fun <U> sendMessage(dataModel: ExchangedModel<U>, callBack:((Result<ByteArray>)->Unit)?=null){
+    fun <U> sendMessage(dataModel: ExchangedModel<U>, callBack:((Result<U>)->Unit)?=null){
         viewModelScope.launch(Dispatchers.IO){
            val result= sendMessageUseCase.invoke(dataModel)
+            callBack?.invoke(result)
+        }
+    }
+
+    fun <U> sendData(dataModel: ExchangedModel<U>, callBack:((Result<U>)->Unit)?=null){
+        viewModelScope.launch(Dispatchers.IO){
+            val result= sendMessageUseCase.invoke(dataModel)
             callBack?.invoke(result)
         }
     }
