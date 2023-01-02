@@ -24,7 +24,7 @@ implementation(project(":sdk"))
    </string-array>
    </resources>
 ```
-3. Third one you have this configuration file , now you have to implements the [a relative link](/sdk/src/main/java/com/psa/sdk/service/AbstractWearableService.kt)
+3. Third one you have this configuration file , now you have to implements the [a relative link](/sdk/src/main/java/com/cgnu/sdk/service/AbstractWearableService.kt)
    there is one abstract Method and it's a Listener to get the Data from the service.
    it's more efficient with an example.
    
@@ -43,7 +43,7 @@ implementation(project(":sdk"))
 }
 ```
    So we override the method,in it's constructor we need the `Class` model we Exchange on the phone/watch communication , and a builder also to build the `ByteArray` received to a model.
-   This sample Listener implements the [a relative link](/sdk/src/main/java/com/psa/sdk/service/DataListener.kt), for more readability,clarity and comprehension,
+   This sample Listener implements the [a relative link](/sdk/src/main/java/com/cgnu/sdk/service/DataListener.kt), for more readability,clarity and comprehension,
    i created a custom implementation for this Interface , and there is how it look.
 ```kotlin
 /**
@@ -68,16 +68,17 @@ class DataListenerImpl<T>(private val jClass: Class<T>,val builder: Builder<T>) 
 
 ```xml
     <!-- for the watch-->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.psa.app">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.cgnu.app">
    <uses-permission android:name="android.permission.WAKE_LOCK" />
-   
-   <service android:name="com.psa.app.util.WearableService" android:enabled="true" android:exported="true">
-   <intent-filter>
-      <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
-      <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
-      <data android:scheme="wear" android:host="*" android:path="/messages" /><!-- path must be the same as wearables capability in wear.xml and a / before-->
-   </intent-filter>
-</service>
+
+   <service android:name="com.cgnu.app.util.WearableService" android:enabled="true"
+           android:exported="true">
+      <intent-filter>
+         <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+         <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+         <data android:scheme="wear" android:host="*"
+                 android:path="/messages" /><!-- path must be the same as wearables capability in wear.xml and a / before-->
+      </intent-filter>
+   </service>
 </manifest>
 ```
-4. Fourth item

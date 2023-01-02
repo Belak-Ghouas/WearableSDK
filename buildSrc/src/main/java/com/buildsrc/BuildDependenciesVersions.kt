@@ -18,9 +18,6 @@
  * Configuration version of all build dependencies
  */
 object BuildDependenciesVersions {
-
-    const val PIMS = "1.3.20"
-
     const val KOTLIN = "1.4.32"
     const val APPCOMPAT = "1.3.0"
     const val MATERIAL = "1.3.0"
@@ -42,19 +39,9 @@ object BuildDependenciesVersions {
     const val MOSHI = "1.12.0"
     const val COIL = "1.2.1"
     const val PLAY_CORE = "1.10.0"
-    const val INSTANT_APP = "17.0.0"
+
     const val ANDROID_DESUGAR = "1.1.5"
-    const val LEAKCANARY = "2.7"
 
-    const val FIREBASE = "28.2.0"
-
-    const val WORKER = "2.5.0"
-
-    const val MP_ANDROID_CHART = "3.1.0"
-
-    const val ANDROID_MAPS = "17.0.1"
-    const val ANDROID_MAPS_KTX = "3.1.0"
-    const val ANDROID_MAPS_UTILS_KTX = "3.1.0"
     const val GOOGLE_PLACES = "1.1.0"
 
     const val ANDROID_LOCATION = "18.0.0"
